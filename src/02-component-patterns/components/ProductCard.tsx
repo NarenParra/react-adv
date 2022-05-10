@@ -1,37 +1,33 @@
 import { useProduct } from "../hooks/useProduct";
 import styles from "../styles/styles.module.css";
-import noImage from "../assets/no-image.jpg";
+import { createContext } from "react";
+import {
+  ProductContextProps,
+  ProductCardProduct,
+} from "../interfaces/interfaces";
 
-interface Props {
-  product: Product;
-}
+//Creacion del contexto
+export const ProductContext = createContext({} as ProductContextProps);
+const { Provider } = ProductContext;
 
-interface Product {
-  id: string;
-  title: string;
-  img?: string;
-}
-
-export const ProductCard = ({ product }: Props) => {
+//primer paso: se separa todo en componentes pequenios
+export const ProductCard = ({ children, product }: ProductCardProduct) => {
   const { counter, increaseBy } = useProduct();
 
   return (
-    <div className={styles.productCard}>
-      <img
-        className={styles.productImg}
-        src={product.img ? product.img : noImage}
-        alt="Coffe"
-      />
-      <span className={styles.productDescription}>{product.title}</span>
-      <div className={styles.buttonsContainer}>
-        <button className={styles.buttonMinus} onClick={() => increaseBy(-1)}>
-          -
-        </button>
-        <div className={styles.countLabel}>{counter}</div>
-        <button className={styles.buttonAdd} onClick={() => increaseBy(+1)}>
-          +
-        </button>
+    <Provider value={{ counter, increaseBy, product }}>
+      <div className={styles.productCard}>
+        {children}
+        {/* <ProductImage img={product.img} />
+      <ProductTitle title={product.title} />
+      <ProductButtons counter={counter} increaseBy={increaseBy} /> */}
       </div>
-    </div>
+    </Provider>
   );
 };
+
+/* 
+****** aniadir propiedades al componente padre ***
+ProductCard.Image = ProductImage;
+ProductCard.Title = ProductTitle;
+ProductCard.Buttons = ProductButtons; */

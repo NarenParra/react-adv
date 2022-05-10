@@ -1,8 +1,14 @@
-import { ProductCard } from "../components/ProductCard";
+import {
+  ProductButtons,
+  ProductCard,
+  ProductImage,
+  ProductTitle,
+} from "../components";
 
 const product = {
   id: "1",
-  title: "title",
+  title: "title from product",
+  img: "./coffee-mug.png",
 };
 
 export const ShoppingPage = () => {
@@ -17,7 +23,18 @@ export const ShoppingPage = () => {
           flexWrap: "wrap",
         }}
       >
-        <ProductCard product={product} />
+        {/* esto ya es un componente compuesto*/}
+        <ProductCard product={product}>
+          <ProductCard.Image />
+          <ProductCard.Title title="Hola mundo" />
+          <ProductCard.Buttons />
+        </ProductCard>
+
+        <ProductCard product={product}>
+          <ProductImage />
+          <ProductTitle />
+          <ProductButtons />
+        </ProductCard>
       </div>
     </div>
   );
