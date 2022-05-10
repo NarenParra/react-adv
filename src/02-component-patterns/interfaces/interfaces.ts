@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import React, { ReactElement } from "react";
 
 export interface ProductContextProps {
     counter: number;
@@ -6,9 +6,11 @@ export interface ProductContextProps {
     product: Product;
   }
 
-export interface ProductCardProduct {
+export interface ProductCardProps {
     product: Product;
     children?: ReactElement | ReactElement[];
+    className?:String;
+    style?:React.CSSProperties;
   }
   
 export interface Product {

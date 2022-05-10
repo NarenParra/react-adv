@@ -3,7 +3,7 @@ import styles from "../styles/styles.module.css";
 import { createContext } from "react";
 import {
   ProductContextProps,
-  ProductCardProduct,
+  ProductCardProps,
 } from "../interfaces/interfaces";
 
 //Creacion del contexto
@@ -11,12 +11,17 @@ export const ProductContext = createContext({} as ProductContextProps);
 const { Provider } = ProductContext;
 
 //primer paso: se separa todo en componentes pequenios
-export const ProductCard = ({ children, product }: ProductCardProduct) => {
+export const ProductCard = ({
+  children,
+  product,
+  className,
+  style,
+}: ProductCardProps) => {
   const { counter, increaseBy } = useProduct();
 
   return (
     <Provider value={{ counter, increaseBy, product }}>
-      <div className={styles.productCard}>
+      <div style={style} className={`${styles.productCard} ${className}`}>
         {children}
         {/* <ProductImage img={product.img} />
       <ProductTitle title={product.title} />
