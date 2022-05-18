@@ -16,16 +16,15 @@ export const ProductCard = ({
   product,
   className,
   style,
+  onChange,
+  value,
 }: ProductCardProps) => {
-  const { counter, increaseBy } = useProduct();
+  const { counter, increaseBy } = useProduct({ onChange, product, value });
 
   return (
     <Provider value={{ counter, increaseBy, product }}>
       <div style={style} className={`${styles.productCard} ${className}`}>
         {children}
-        {/* <ProductImage img={product.img} />
-      <ProductTitle title={product.title} />
-      <ProductButtons counter={counter} increaseBy={increaseBy} /> */}
       </div>
     </Provider>
   );
